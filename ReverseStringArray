@@ -1,0 +1,35 @@
+import java.util.Arrays;
+
+public class ReverseStringArray {
+
+
+    public static String[] reverseArray(String[] array) {
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left < right) {
+
+            String temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+
+            // --> middle
+            left++;
+            right--;
+        }
+
+        return array;
+    }
+
+    public static void main(String[] args) {
+
+        String[] strings = {"RACHANA", "ROHAN", "NEERJA", "GIRISH", "SONALI"};
+
+        System.out.println("Original Array: " + Arrays.toString(strings));
+
+        // Reverse
+        String[] reversedStrings = reverseArray(strings);
+
+        System.out.println("Reversed Array: " + Arrays.toString(reversedStrings));
+    }
+}
