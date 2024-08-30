@@ -1,0 +1,33 @@
+
+public class Employee {
+
+    String name;
+    int employee_id;
+
+    public Employee(String name, int employee_id) {
+        this.name = name;
+        this.employee_id = employee_id;
+    }
+
+    public void Display_details() {
+        System.out.println("Employee: " + name + ", employee_id " + employee_id);
+    }
+}
+class Employee_details{
+    public static void main(String[] args) {
+        Employee[] employees = new Employee[4];
+
+
+        employees[0] = new Employee("Neelam", 1234567);
+        employees[1] = new Employee("Rachana", 123456);
+        employees[2] = new Employee("Rohan", 12345);
+        employees[3] = new Employee("Mohan", 123450);
+
+
+
+        for (int i = 0; i < employees.length; i++) {
+            employees[i].Display_details();
+        }
+
+    }
+}
