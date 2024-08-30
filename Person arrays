@@ -1,0 +1,86 @@
+
+import java.util.*;
+
+import java.util.Scanner;
+
+public class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void showData() {
+        System.out.println("Person: " + name + ", Age: " + age);
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class PersonDetails {
+    public static void main(String[] args) {
+        Person[] people = new Person[4];
+
+        people[0] = new Person("Neelam", 18);
+        people[1] = new Person("Rachana", 17);
+        people[2] = new Person("Rohan", 20);
+        people[3] = new Person("Mohan", 22);
+
+        // Show all person data
+        System.out.println("All persons:");
+        for (Person person : people) {
+            person.showData();
+        }
+
+        // Sort persons by age
+        Arrays.sort(people, Comparator.comparingInt(Person::getAge));
+        System.out.println("\nSorted persons by age:");
+        for (Person person : people) {
+            person.showData();
+        }
+
+        // Find the oldest person
+        Person oldestPerson = findOldestPerson(people);
+        System.out.println("\nOldest person:");
+        if (oldestPerson != null) {
+            oldestPerson.showData();
+        }
+
+        // Count persons with a specific name
+        Scanner Sc = new Scanner(System.in);
+        System.out.println("enter name to check frequency");
+        String n=Sc.nextLine();
+
+        String nameToCount = n ;
+        int count = countPersonsByName(people, nameToCount);
+        System.out.println("\nCount of persons with the name \"" + nameToCount + "\": " + count);
+    }
+
+    public static Person findOldestPerson(Person[] people) {
+        Person oldest = null;
+        for (Person person : people) {
+            if (oldest == null || person.getAge() > oldest.getAge()) {
+                oldest = person;
+            }
+        }
+        return oldest;
+    }
+
+    public static int countPersonsByName(Person[] people, String name) {
+        int count = 0;
+        for (Person person : people) {
+            if (person.getName().equalsIgnoreCase(name)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
