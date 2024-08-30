@@ -1,0 +1,30 @@
+public class City {
+
+    String name;
+    int population;
+    public City(String name, int population) {
+        this.name = name;
+        this.population = population;
+    }
+
+    public void displayDetails() {
+        System.out.println("City: " + name + ", Population: " + population);
+    }
+}
+class CityDetails {
+    public static void main(String[] args) {
+        City[] cities = new City[5];
+
+        cities[0] = new City("Pune", 5419000);
+        cities[1] = new City("JA", 3980000);
+        cities[2] = new City("GOA", 27160);
+        cities[3] = new City("SIKKIM", 23280);
+        cities[4] = new City("JAMMU", 169000);
+
+
+        for (int i = 0; i < cities.length; i++) {
+            cities[i].displayDetails();
+        }
+
+    }
+}
