@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+class student{
+    String name;
+
+    int rollNo;
+
+    String typeOfDegree;
+
+    student(String name, int rollNo, String typeOfDegree){
+        this.name = name;
+        this.rollNo = rollNo;
+        this.typeOfDegree = typeOfDegree;
+
+    }
+    public void display(){
+        System.out.println("Name: " + name);
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Type of Degree: " + typeOfDegree);
+    }
+}
+class UG extends student{
+    int percentage_of_12th;
+    UG(String name, int rollNo, String typeOfDegree, int percentage_of_12th){
+        super(name, rollNo, typeOfDegree);
+        this.percentage_of_12th = percentage_of_12th;
+    }
+    @Override
+    public void display(){
+        super.display();
+        System.out.println("Percentage: " + percentage_of_12th);
+    }
+}
+class PG extends student{
+    int CGPA_OF_UG;
+    PG(String name, int rollNo, String typeOfDegree, int CGPA_OF_UG){
+        super(name, rollNo, typeOfDegree);
+        this.CGPA_OF_UG = CGPA_OF_UG;
+    }
+    @Override
+    public void display(){
+        super.display();
+        System.out.println("CGPA: " + CGPA_OF_UG);
+    }
+}
+public class Main1{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the name of your student : ");
+        String name = sc.nextLine();
+        System.out.println("Enter the roll no : ");
+        int rollNo = sc.nextInt();
+        System.out.println("Enter the type of degree : ");
+        String typeOfDegree = sc.next();
+
+        if (typeOfDegree.equalsIgnoreCase("UG")) {
+            System.out.println("Enter the percentage of 12th grade: ");
+            int percentage_of_12th = sc.nextInt();
+            UG ugStudent = new UG(name, rollNo, typeOfDegree, percentage_of_12th);
+            ugStudent.display();
+        } else if (typeOfDegree.equalsIgnoreCase("PG")) {
+            System.out.println("Enter the CGPA of UG: ");
+            int CGPA_OF_UG = sc.nextInt();
+            PG pgStudent = new PG(name, rollNo, typeOfDegree, CGPA_OF_UG);
+            pgStudent.display();
+        } else {
+            System.out.println("Invalid degree type. Please enter UG or PG.");
+        }
+
+        sc.close();
+    }
+}
