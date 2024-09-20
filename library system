@@ -1,0 +1,175 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+abstract class Item {
+    private String title;
+    private String ISBN;
+    private boolean isAvailable;
+
+    public Item(String title, String ISBN) {
+        this.title = title;
+        this.ISBN = ISBN;
+        this.isAvailable = true;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
+    }
+
+    public abstract String getDetails();
+}
+
+class Book extends Item {
+    private String author;
+
+    public Book(String title, String ISBN, String author) {
+        super(title, ISBN);
+        this.author = author;
+    }
+
+    public String getDetails() {
+        return "Book - Title: " + getTitle() + ", Author: " + author + ", ISBN: " + getISBN() + ", Available: " + (isAvailable() ? "Yes" : "No");
+    }
+}
+
+class Library {
+    private ArrayList<Book> catalog = new ArrayList<>();
+
+    public void addBook(Book book) {
+        for (Book b : catalog) {
+            if (b.getISBN().equals(book.getISBN())) {
+                System.out.println("Book with this ISBN already exists.");
+                return;
+            }
+        }
+        catalog.add(book);
+        System.out.println("Book added successfully.");
+    }
+
+    public void removeBook(String identifier) {
+        Book bookToRemove = null;
+        for (Book book : catalog) {
+            if (book.getISBN().equals(identifier)) {
+                bookToRemove = book;
+                break;
+            }
+        }
+        if (bookToRemove != null) {
+            catalog.remove(bookToRemove);
+            System.out.println("Book removed successfully.");
+        } else {
+            System.out.println("Book not found.");
+        }
+    }
+
+    public void displayBook(String identifier) {
+        for (Book book : catalog) {
+            if (book.getISBN().equals(identifier)) {
+                System.out.println(book.getDetails());
+                return;
+            }
+        }
+        System.out.println("Book not found.");
+    }
+
+    public void issueBook(String identifier) {
+        for (Book book : catalog) {
+            if (book.getISBN().equals(identifier)) {
+                if (book.isAvailable()) {
+                    book.setAvailable(false);
+                    System.out.println("Book issued successfully.");
+                } else {
+                    System.out.println("Book is already issued.");
+                }
+                return;
+            }
+        }
+        System.out.println("Book not found.");
+    }
+
+    public void returnBook(String identifier) {
+        for (Book book : catalog) {
+            if (book.getISBN().equals(identifier)) {
+                if (!book.isAvailable()) {
+                    book.setAvailable(true);
+                    System.out.println("Book returned successfully.");
+                } else {
+                    System.out.println("Book was not issued.");
+                }
+                return;
+            }
+        }
+        System.out.println("Book not found.");
+    }
+}
+ class LibrarySystem {
+    public static void main(String[] args) {
+        Library library = new Library();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nLibrary Catalog System");
+            System.out.println("1. Add Book");
+            System.out.println("2. Remove Book");
+            System.out.println("3. Display Book");
+            System.out.println("4. Issue Book");
+            System.out.println("5. Return Book");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter book title: ");
+                    String bookTitle = scanner.nextLine();
+                    System.out.print("Enter book identifier: ");
+                    String bookIdentifier = scanner.nextLine();
+                    System.out.print("Enter book author: ");
+                    String bookAuthor = scanner.nextLine();
+                    library.addBook(new Book(bookTitle, bookIdentifier, bookAuthor));
+                    break;
+                case 2:
+                    System.out.print("Enter book identifier to remove: ");
+                    String removeIdentifier = scanner.nextLine();
+                    library.removeBook(removeIdentifier);
+                    break;
+                case 3:
+                    System.out.print("Enter book identifier to display: ");
+                    String displayIdentifier = scanner.nextLine();
+                    library.displayBook(displayIdentifier);
+                    break;
+                case 4:
+                    System.out.print("Enter book identifier to issue: ");
+                    String issueIdentifier = scanner.nextLine();
+                    library.issueBook(issueIdentifier);
+                    break;
+                case 5:
+                    System.out.print("Enter book identifier to return: ");
+                    String returnIdentifier = scanner.nextLine();
+                    library.returnBook(returnIdentifier);
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 6);
+
+        scanner.close();
+    }
+}
