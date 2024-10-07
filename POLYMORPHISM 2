@@ -1,0 +1,123 @@
+
+import java.util.Scanner;
+
+class Post {
+    String content,comment;
+    int like;
+    public void getPost(){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter Post Content=");
+        content=s.nextLine();
+    }
+    public void getComment(){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter Post Comment=");
+        comment=s.nextLine();
+    }
+    public void CreatePost(){
+        System.out.println("Post Created="+content);
+    }
+    public void comment(){
+        System.out.println("Comment="+comment);
+    }
+    public void Like(){
+        like++;
+        System.out.println("Total Likes="+like);
+    }
+}
+class TextPost extends Post{
+    public void getTextPost(){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter TextPost Content=");
+        content=s.nextLine();
+    }
+    public void getTextComment(){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter TextPost Comment=");
+        comment=s.nextLine();
+    }
+    @Override
+    public void CreatePost() {
+        System.out.println("Text Post="+content);
+    }
+    @Override
+    public void comment(){
+        System.out.println("Comment="+comment);
+    }
+    @Override
+    public void Like(){
+        like++;
+        System.out.println("Total Likes="+like);
+    }
+}
+class ImagePost extends Post{
+    String url;
+    public void getImgPost(){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter Image Post Content=");
+        content=s.nextLine();
+        System.out.println("Enter Image URL=");
+        url=s.nextLine();
+    }
+    public void getImgComment(){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter Image Post Comment=");
+        comment=s.nextLine();
+    }
+
+    @Override
+    public void CreatePost() {
+        System.out.println("ImagePost="+content+"\nURL="+url);
+    }
+
+    @Override
+    public void comment() {
+        System.out.println("Comment="+comment);
+    }
+
+    @Override
+    public void Like() {
+        like++;
+        System.out.println("Total Likes="+like);
+    }
+}
+public class SocialMediaApp{
+    public static void main(String[] args) {
+        TextPost text=new TextPost();
+        text.getTextPost();
+        text.getTextComment();
+        text.CreatePost();
+        text.comment();
+        text.Like();
+
+        ImagePost img=new ImagePost();
+        img.getImgPost();
+        img.getImgComment();
+        img.CreatePost();
+        img.comment();
+        img.Like();
+        img.Like();
+    }
+}
+
+//OUPUT:
+Enter TextPost Content=
+THIS IS A TEXT MSG
+Enter TextPost Comment=
+THIS IS A AWESOME POST
+Text Post=THIS IS A TEXT MSG
+Comment=THIS IS A AWESOME POST
+Total Likes=1
+Enter Image Post Content=
+HISTORICAL MONUMENT
+Enter Image URL=
+//http:tajmahal.com
+Enter Image Post Comment=
+TAJ MAHAL
+ImagePost=HISTORICAL MONUMENT
+URL=//http:tajmahal.com
+Comment=TAJ MAHAL
+Total Likes=1
+Total Likes=2
+
+Process finished with exit code 0
